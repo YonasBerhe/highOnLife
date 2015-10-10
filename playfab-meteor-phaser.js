@@ -4,6 +4,11 @@ if (Meteor.isClient) {
       // game is a global var from /client/games/breakout.js
 
   );
+  Template.highOnLife.helpers({
+    rendered: function(){
+
+    }
+  });
 }
 
 if (Meteor.isServer) {
