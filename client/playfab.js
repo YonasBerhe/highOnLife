@@ -1,8 +1,11 @@
+console.log('hey')
+
 //GLOBAL
 playfab = PlayFabClientSDK
 
 playfab.settings.title_id = "7A35"
-playfab.settings.developer_secret_key = "9M4SFMKC1YRFN8DPD499IEFWJD3YU5AR148SBU5I57XSYOZB3G"
+playfab.settings.developer_secret_key =
+  "9M4SFMKC1YRFN8DPD499IEFWJD3YU5AR148SBU5I57XSYOZB3G"
 
 function Guid() {
   function s4() {
@@ -27,6 +30,9 @@ var LocalStorage = {
         return localStorage.clear(itemName)
     }
 }
+
+
+
 /*
 var sample = { PlayFabId: "8C923B18390201DE", uuid: 1234, userName:"Kristoffer" }
 
@@ -47,20 +53,20 @@ function getUser(){
 function updateUsername(username){
     var request = {
         DisplayName: username
-    }
+    };
     playfab.UpdateUserTitleDisplayName(request, function(result){
 
         if(result.status === "OK"){
-            var User = LocalStorage.getItem('User')
-            User.username = result.data.DisplayName
+            var User = LocalStorage.getItem('User');
+            User.username = result.data.DisplayName;
 
-            LocalStorage.setItem('User', User)
+            LocalStorage.setItem('User', User);
 
             // TODO: add case for duplicate user name
         } else {
-            console.log('something went wrong', result.code, result.status)
+            console.log('something went wrong', result.code, result.status);
         }
-    })
+    });
 }
 
 function createUserLoginRequest(uuid){
@@ -68,7 +74,7 @@ function createUserLoginRequest(uuid){
         TitleId : playfab.settings.title_id,
         CustomId: uuid,
         "CreateAccount": false
-    }
+    };
 }
 
 function createUserRequest(){
@@ -88,6 +94,9 @@ function createUser(){
             if(result.status === "OK"){
                 var User = result.data
                 LocalStorage.setItem('User', User)
+                sessionStorage.setItem('SessionTicket', 'value');
+
+                console.log('user created')
 
             } else {
                 console.log('something went wrong', result.code, result.status)
@@ -109,10 +118,18 @@ function loginUser(ID){
     })
 }
 
+function delay(fn, time){
+    var timeOut = time | 3000
+    setTimeout(fn, timeOut)
+}
 
+//create user on load
 createUser()
 
-
+delay(updateUsername('kristoffer'))
+delay(function(){
+    console.log(getUser())
+})
 /*
 
 
