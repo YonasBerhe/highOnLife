@@ -1,8 +1,10 @@
+"use strict";
 //GLOBAL
 playfab = PlayFabClientSDK
 
 playfab.settings.title_id = "7A35"
-playfab.settings.developer_secret_key = "9M4SFMKC1YRFN8DPD499IEFWJD3YU5AR148SBU5I57XSYOZB3G"
+playfab.settings.developer_secret_key =
+  "9M4SFMKC1YRFN8DPD499IEFWJD3YU5AR148SBU5I57XSYOZB3G"
 
 function Guid() {
   function s4() {
@@ -47,20 +49,20 @@ function getUser(){
 function updateUsername(username){
     var request = {
         DisplayName: username
-    }
+    };
     playfab.UpdateUserTitleDisplayName(request, function(result){
 
         if(result.status === "OK"){
-            var User = LocalStorage.getItem('User')
-            User.username = result.data.DisplayName
+            var User = LocalStorage.getItem('User');
+            User.username = result.data.DisplayName;
 
-            LocalStorage.setItem('User', User)
+            LocalStorage.setItem('User', User);
 
             // TODO: add case for duplicate user name
         } else {
-            console.log('something went wrong', result.code, result.status)
+            console.log('something went wrong', result.code, result.status);
         }
-    })
+    });
 }
 
 function createUserLoginRequest(uuid){
@@ -68,7 +70,7 @@ function createUserLoginRequest(uuid){
         TitleId : playfab.settings.title_id,
         CustomId: uuid,
         "CreateAccount": false
-    }
+    };
 }
 
 function createUserRequest(){
