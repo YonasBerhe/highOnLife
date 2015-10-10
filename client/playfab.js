@@ -111,10 +111,13 @@ function loginUser(ID){
     })
 }
 
-
+//create user on load
 createUser()
 
-
+delay(updateUsername('kristoffer'))
+delay(function(){
+    console.log(getUser())
+})
 /*
 
 
