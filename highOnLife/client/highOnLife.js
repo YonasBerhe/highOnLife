@@ -1,15 +1,15 @@
 /**
-* @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2015 Photon Storm Ltd.
-* @license      {@link http://choosealicense.com/licenses/no-license/|No License}
-*
-* @description  This example requires the Phaser Virtual Joystick Plugin to run.
-*               For more details please see http://phaser.io/shop/plugins/virtualjoystick
-*/
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2015 Photon Storm Ltd.
+ * @license      {@link http://choosealicense.com/licenses/no-license/|No License}
+ *
+ * @description  This example requires the Phaser Virtual Joystick Plugin to run.
+ *               For more details please see http://phaser.io/shop/plugins/virtualjoystick
+ */
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example');
 
-var PhaserGame = function () {
+var PhaserGame = function() {
 
     this.sprite;
 
@@ -25,22 +25,24 @@ var PhaserGame = function () {
 
 PhaserGame.prototype = {
 
-    init: function () {
+    init: function() {
 
         this.game.renderer.renderSession.roundPixels = true;
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
     },
 
-    preload: function () {
+    preload: function() {
 
-        this.load.atlas('arcade', 'assets/virtualjoystick/skins/arcade-joystick.png', 'assets/virtualjoystick/skins/arcade-joystick.json');
-        this.load.image('ball', 'assets/virtualjoystick/beball1.png');
-        this.load.image('bg', 'assets/virtualjoystick/space1.png');
+        this.load.atlas('arcade', 'assets/images/arcade-joystick.png', 'js/arcade-joystick.json');
+
+        this.load.image('ball', 'assets/images/beball1.png');
+
+        this.load.image('bg', 'assets/images/space1.png');
 
     },
 
-    create: function () {
+    create: function() {
 
         this.add.image(0, 0, 'bg');
 
@@ -63,35 +65,32 @@ PhaserGame.prototype = {
 
     },
 
-    pressButtonA: function () {
+    pressButtonA: function() {
 
         this.sprite.tint = Math.random() * 0xFFFFFF;
 
     },
 
-    pressButtonB: function () {
+    pressButtonB: function() {
 
         this.sprite.scale.set(Math.random() * 4);
 
     },
 
-    pressButtonC: function () {
+    pressButtonC: function() {
 
         this.sprite.scale.set(1);
         this.sprite.tint = 0xFFFFFF;
 
     },
 
-    update: function () {
+    update: function() {
 
         var maxSpeed = 400;
 
-        if (this.stick.isDown)
-        {
+        if (this.stick.isDown) {
             this.physics.arcade.velocityFromRotation(this.stick.rotation, this.stick.force * maxSpeed, this.sprite.body.velocity);
-        }
-        else
-        {
+        } else {
             this.sprite.body.velocity.set(0);
         }
 
