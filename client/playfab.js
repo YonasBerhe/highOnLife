@@ -1,4 +1,5 @@
-"use strict";
+console.log('hey')
+
 //GLOBAL
 playfab = PlayFabClientSDK
 
@@ -29,6 +30,9 @@ var LocalStorage = {
         return localStorage.clear(itemName)
     }
 }
+
+
+
 /*
 var sample = { PlayFabId: "8C923B18390201DE", uuid: 1234, userName:"Kristoffer" }
 
@@ -90,6 +94,9 @@ function createUser(){
             if(result.status === "OK"){
                 var User = result.data
                 LocalStorage.setItem('User', User)
+                sessionStorage.setItem('SessionTicket', 'value');
+
+                console.log('user created')
 
             } else {
                 console.log('something went wrong', result.code, result.status)
@@ -111,10 +118,18 @@ function loginUser(ID){
     })
 }
 
+function delay(fn, time){
+    var timeOut = time | 3000
+    setTimeout(fn, timeOut)
+}
 
+//create user on load
 createUser()
 
-
+delay(updateUsername('kristoffer'))
+delay(function(){
+    console.log(getUser())
+})
 /*
 
 
