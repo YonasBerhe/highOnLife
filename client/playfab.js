@@ -1,4 +1,5 @@
-"use strict";
+console.log('hey')
+
 //GLOBAL
 playfab = PlayFabClientSDK
 
@@ -90,6 +91,8 @@ function createUser(){
             if(result.status === "OK"){
                 var User = result.data
                 LocalStorage.setItem('User', User)
+
+                console.log('user created',)
 
             } else {
                 console.log('something went wrong', result.code, result.status)
