@@ -36,3 +36,9 @@ Multiplayer where each person get a drug and each see the world and each other d
 - Bryan Rivera
 - Kristoffer Hebert
 
+## Sounds/ Graphics
+- Phaser sample graphics libraries
+- Music by Win32 
+
+## Link
+- highonlife.meteor.com
