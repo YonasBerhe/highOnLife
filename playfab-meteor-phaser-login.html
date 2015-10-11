@@ -1,5 +1,7 @@
 <head>
   <title>Playfab Meteor Phaser example Login Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 </head>
 
 <body>
@@ -7,9 +9,14 @@
 </body>
 
 <template name="login">
-    <form id="loginForm" method="#">
-        <p>Username: </p>
-        <input type="text" name="username" value="Type Username Here" id='username'></input>
-        <input type="submit" value="Log In"></input>
-    </form>
+    <div class="loginWrapper well">
+        <form id="loginForm" method="#">
+            <p id="usernameText">Username</p>
+            <input type="text" name="username" value="Type Username Here" id='username'></input>
+            <br>
+            <input type="submit" value="Log In"></input>
+        </form>
+    </div>
 </template>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

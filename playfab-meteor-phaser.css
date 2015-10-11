@@ -11,3 +11,28 @@ canvas {
     right: 0;
     margin:auto;
 }
+
+.loginWrapper {
+    width: 20%;
+    height: 20%;
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
+.usernameText {
+    text-align: center;
+    position: inherit;
+    width: 80%;
+    margin: auto;
+}
+
+.username {
+    text-align: center;
+    position: inherit;
+}
