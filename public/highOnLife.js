@@ -12,10 +12,8 @@ var game = new Phaser.Game(screen.w, screen.h, Phaser.AUTO, 'highOnLife', {
 function preload() {
   console.log("PRELOAD");
 
-  game.load.atlas('breakout', '/assets/games/breakout/breakout.png', 'assets/games/breakout/breakout.json');
-
-  game.load.image('starfield', '/assets/bg/starfield.jpg');
-
+  game.load.audio('mainmusic', ['assets/audio/main.mp3','assets/audio/main.ogg']);
+  game.load.image('starfield', 'assets/bg/starfield.jpg');
   game.load.spritesheet('player', 'assets/sprites/spaceman.png', 16, 16);
 }
 
@@ -32,7 +30,7 @@ var livesText;
 var drugTypes = ["meth", "weed", "lsd", "cocaine"];
 
 var s;
-
+var music;
 function create() {
   console.log("CREATE");
 
@@ -40,7 +38,9 @@ function create() {
   // s = game.add.tileSprite(0, 0, 800, 600, 'starfield');
 
   game.stage.backgroundColor = '#ffffff';
-
+  music = game.add.audio('mainmusic');
+  music.play()
+  
   // NOTE: Drug Setup
   drugs = game.add.group();
   drugs.enableBody = true;
