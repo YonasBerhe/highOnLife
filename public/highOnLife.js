@@ -28,10 +28,16 @@ var score = 0;
 
 var scoreText;
 var livesText;
+var timeText;
+
+var playTime = 0.1; //in minutes
+var currentTime = "1:00";
 
 var drugTypes = ["meth", "weed", "lsd", "cocaine"];
 
 var s;
+
+
 
 function create() {
   console.log("CREATE");
@@ -39,7 +45,7 @@ function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE);
   // s = game.add.tileSprite(0, 0, 800, 600, 'starfield');
 
-  game.stage.backgroundColor = '#ffffff';
+  game.stage.backgroundColor = '#000000';
 
   // NOTE: Drug Setup
   drugs = game.add.group();
@@ -87,6 +93,7 @@ function create() {
     fill: "#ffffff",
     align: "left"
   });
+
   timeText = game.add.text(game.world.centerX - 110, 10, 'Time Left ' + currentTime, {
     font: "40px Arial",
     fill: "#ffffff",
@@ -105,6 +112,19 @@ function create() {
             randomizeInterval: false,
             shakeAxis: 'xy'
         });
+
+  timeText = game.add.text(game.world.centerX - 110, 10, 'Time Left ' + currentTime, {
+    font: "40px Arial",
+    fill: "#ffffff",
+    align: "center"
+  });
+  endgameText = game.add.text(game.world.centerX, 400, '- Start Moving! -', {
+    font: "40px Arial",
+    fill: "#ffffff",
+    align: "center"
+  });
+  endgameText.anchor.setTo(0.5, 0.5);
+  startTimer(60 * playTime);
 
 }
 
@@ -129,21 +149,21 @@ function update() {
 
   moving = false;
 
-  if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && player.x > 0) {
+  if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && player.x > 0 && !outOfTime) {
     player.x -= 4;
     player.play('left');
     moving = true;
-  } else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && player.x < screen.w) {
+  } else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && player.x < screen.w && !outOfTime) {
     player.x += 4;
     player.play('right');
     moving = true;
   }
 
-  if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && player.y > 0) {
+  if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && player.y > 0 && !outOfTime) {
     player.y -= 4;
     player.play('up');
     moving = true;
-  } else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && player.y < screen.h) {
+  } else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && player.y < screen.h && !outOfTime) {
     player.y += 4;
     player.play('down');
     moving = true;
@@ -151,6 +171,7 @@ function update() {
 
   if (moving) {
     game.stage.backgroundColor = getRandomColor();
+    playerMoved();
   } else {
     player.animations.stop();
   }
@@ -160,11 +181,12 @@ function update() {
 }
 
 function gameOver() {
+  console.log('Called gameOver');
+  endgameText.text = "- Game Over! -";
+  endgameText.visible = true;
 
-  ball.body.velocity.setTo(0, 0);
+  // TODO: add end of game shit
 
-  introText.text = 'Game Over!';
-  introText.visible = true;
 
 }
 
@@ -194,9 +216,39 @@ function playerHitdrug(_player, _drug) {
     //  And bring the drugs back from the dead :)
     drugs.callAll('revive');
   }
-
 }
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+function playerMoved() {
+  endgameText.visible = false;
+}
+
+var outOfTime = false;
+// timer function
+function startTimer(duration) {
+  var timer = duration,
+    minutes, seconds;
+  setInterval(function() {
+    if (!outOfTime) {
+      minutes = parseInt(timer / 60, 10);
+      seconds = parseInt(timer % 60, 10);
+
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      currentTime = minutes + ":" + seconds;
+
+      if (--timer < 0) {
+        // timer = duration;
+        console.log("done!");
+        outOfTime = true;
+        gameOver();
+      }
+    }
+  }, 1000);
+  // }, 1000);
 }

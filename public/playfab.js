@@ -123,6 +123,23 @@ function delay(fn, time){
     }, timeOut)
 }
 
+function updateScore(score){
+    var request = {
+        "UserStatistics": {
+          "score": score
+        }
+    }
+    playfab.UpdateUserStatistics(request, function(result){
+        if(result.status === "OK"){
+            console.log('User score updated')
+        } else {
+            console.log('something went wrong', result.code, result.status, result)
+        }
+    })
+}
+
+
+
 /*
 
 
