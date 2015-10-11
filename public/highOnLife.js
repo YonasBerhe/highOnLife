@@ -9,6 +9,7 @@ var game = new Phaser.Game(screen.w, screen.h, Phaser.AUTO, 'highOnLife', {
   update: update
 });
 
+
 function preload() {
   console.log("PRELOAD");
 
@@ -34,7 +35,7 @@ function preload() {
 
   //  Firefox doesn't support mp3 files, so use ogg
   game.load.audio('boden', ['assets/audio/main.mp3', 'assets/audio/main.ogg']);
-
+  game.load.audio('getdrug',['assets/audio/sfx/drug.mp3','assets/audio/sfx/drug.ogg']);
 }
 
 var player;
@@ -67,6 +68,7 @@ var currentTime = "1:00";
 
 var drugTypes = ["meth", "weed", "lsd", "cocaine"];
 
+var druggetsound;
 var s;
 var music;
 var speed = 4;
@@ -83,6 +85,8 @@ function create() {
   music = game.add.audio('boden', true);
   music.loop = true;
   music.play();
+
+  druggetsound = game.add.audio('getdrug', true);
 
   // NOTE: Drug Setup
   drugs = game.add.group();
@@ -233,7 +237,7 @@ function playerHitdrug(_player, _drug) {
   score += 10;
 
   scoreText.text = 'score: ' + score;
-
+  druggetsound.play();
   //Shake camera
   game.plugins.screenShake.shake(250);
 
