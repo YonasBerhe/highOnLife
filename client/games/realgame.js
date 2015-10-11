@@ -38,13 +38,11 @@ var s;
 
 function create() {
 
-  //  Make our game world 2000x2000 pixels in size (the default is to match the game size)
-  // game.world.setBounds(0, 0, 2000, 2000);
-  // use set bound to canvas size plus acount for sprite size
-  game.world.setBounds(0, 0, game.width - 10, game.height - 10);
-
   // Check bounds collisions against all walls
   game.physics.startSystem(Phaser.Physics.ARCADE);
+
+  // use set bound to canvas size plus acount for sprite size
+  game.world.setBounds(0, 0, game.width - 10, game.height - 10);
 
   // add background
   s = game.add.tileSprite(0, 0, 800, 600, 'starfield');
@@ -55,11 +53,11 @@ function create() {
 
   var drug;
 
-    for (var i = 0; i < 8; i++) {
-      drug = drugs.create(game.world.randomX, game.world.randomY, 'breakout', 'brick_' + 3 + '_1.png');
-      drug.body.bounce.set(1);
-      drug.body.immovable = true;
-    }
+  for (var i = 0; i < 8; i++) {
+    drug = drugs.create(game.world.randomX, game.world.randomY, 'breakout', 'brick_' + 3 + '_1.png');
+    drug.body.bounce.set(1);
+    drug.body.immovable = true;
+  }
 
 
   paddle = game.add.sprite(game.world.centerX, game.world.centerY, 'breakout', 'paddle_big.png');
@@ -70,7 +68,7 @@ function create() {
 
   paddle.body.collideWorldBounds = true;
   paddle.body.bounce.set(1);
-  paddle.body.immovable = true;
+  // paddle.body.immovable = true;
 
   // ball = game.add.sprite(game.world.centerX, paddle.y - 16, 'breakout', 'ball_1.png');
   // ball.anchor.set(0.5);
@@ -108,30 +106,24 @@ function create() {
 
 function update() {
 
-  if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
-    {
-        paddle.x -= 4;
-    }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT))
-    {
-        paddle.x += 4;
-    }
+  if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+    paddle.x -= 4;
+  } else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+    paddle.x += 4;
+  }
 
-    if (game.input.keyboard.isDown(Phaser.Keyboard.UP))
-    {
-        paddle.y -= 4;
-    }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN))
-    {
-        paddle.y += 4;
-    }
+  if (game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
+    paddle.y -= 4;
+  } else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
+    paddle.y += 4;
+  }
 
 
-  // if (ballOnPaddle) {
-  //   ball.body.x = paddle.x;
+  // if (paddle.body.x == drug.body.x && paddle.body.y == drug.body.y) {
+  //   console.log("drugs!");
   // } else {
-    // game.physics.arcade.collide(ball, paddle, ballHitPaddle, null, this);
-    game.physics.arcade.collide(paddle, drugs, playerHitdrug, null, this);
+  // game.physics.arcade.collide(ball, paddle, ballHitPaddle, null, this);
+  game.physics.arcade.overlap(paddle, drugs, playerHitdrug, null, this);
   // }
 }
 
