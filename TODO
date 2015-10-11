@@ -1,8 +1,7 @@
 Prototype:
   ☐ Drug Event (color) @Bogdan @Louis
   ☐ SoundFX @Bryan
-  ☐ Routing @Yonas @Kris
-Polish-Stage-1:
+  Polish-Stage-1:
   ☐ Background Music @Bryan
   ☐ Environment Effect (color) @Akshay @Louis
   ☐ NPC (Teddy Bears, non-playable character) @Louis
@@ -17,6 +16,9 @@ Extra:
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+Routing @Yonas @Kris
+  ✔Login and Create user using playfab @Kris @Yonas
+  ✔ Routing @Yonas
   ✔ Setup Meteor + PlayFab @Kris @done(2015-10-10 18:12) @project(Prototype)
   ✔ Controllable character @Yonas @Bogdan @Louis @done(2015-10-10 16:00) @project(Prototype)
   ✔ Setup Meteor + Phaser @Kris @done(2015-10-10 15:24) @project(Prototype)
