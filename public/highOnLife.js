@@ -1,12 +1,12 @@
 var screen = {
   w: window.innerWidth,
   h: window.innerHeight,
-}
+};
 
 var game = new Phaser.Game(screen.w, screen.h, Phaser.AUTO, 'highOnLife', {
- preload: preload,
- create: create,
- update: update
+  preload: preload,
+  create: create,
+  update: update
 });
 
 function preload() {
@@ -17,9 +17,17 @@ function preload() {
   game.load.image('starfield', '/assets/bg/starfield.jpg');
 
   game.load.spritesheet('player', 'assets/sprites/spaceman.png', 16, 16);
+
+  game.load.spritesheet('cabinet', 'assets/sprites/cabinet.png', 35, 54);
+
+  //  Firefox doesn't support mp3 files, so use ogg
+  game.load.audio('boden', ['assets/audio/main.mp3', 'assets/audio/main.ogg']);
+
 }
 
 var player;
+
+var cabinet;
 
 var drugs;
 
@@ -30,14 +38,14 @@ var scoreText;
 var livesText;
 var timeText;
 
-var playTime = 0.1; //in minutes
+var playTime = 2; //in minutes
 var currentTime = "1:00";
 
 var drugTypes = ["meth", "weed", "lsd", "cocaine"];
 
 var s;
-
-
+var music;
+var speed = 4;
 
 function create() {
   console.log("CREATE");
@@ -46,6 +54,10 @@ function create() {
   // s = game.add.tileSprite(0, 0, 800, 600, 'starfield');
 
   game.stage.backgroundColor = '#000000';
+
+  //play music
+  music = game.add.audio('boden', true);
+  music.play();
 
   // NOTE: Drug Setup
   drugs = game.add.group();
@@ -64,6 +76,7 @@ function create() {
 
   // NOTE: Player Setup
   player = game.add.sprite(game.world.centerX, game.world.centerY, 'player', 1);
+  cabinet = game.add.sprite(game.world.centerX, game.world.centerY, 'cabinet', 1);
 
   left = player.animations.add('left', [8, 9], 10, true);
   right = player.animations.add('right', [1, 2], 10, true);
@@ -88,11 +101,13 @@ function create() {
     fill: "#ffffff",
     align: "left"
   });
-  livesText = game.add.text(680, 550, 'lives: 3', {
-    font: "20px Arial",
+  timeText = game.add.text(game.world.centerX - 110, 10, 'Time Left ' + currentTime, {
+    font: "40px Arial",
     fill: "#ffffff",
-    align: "left"
+    align:"center"
   });
+
+  startTimer(60 * playTime);
 
   timeText = game.add.text(game.world.centerX - 110, 10, 'Time Left ' + currentTime, {
     font: "40px Arial",
@@ -107,6 +122,12 @@ function create() {
   endgameText.anchor.setTo(0.5, 0.5);
   startTimer(60 * playTime);
 
+  game.plugins.screenShake = game.plugins.add(Phaser.Plugin.ScreenShake);
+
+  game.plugins.screenShake.setup({
+     shakeX: true,
+     shakeY: true
+    });
 }
 
 /**
@@ -130,22 +151,22 @@ function update() {
 
   moving = false;
 
-  if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && player.x > 0 && !outOfTime) {
-    player.x -= 4;
+  if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && player.x > 0) {
+    player.x -= speed;
     player.play('left');
     moving = true;
-  } else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && player.x < screen.w && !outOfTime) {
-    player.x += 4;
+  } else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && player.x < screen.w) {
+    player.x += speed;
     player.play('right');
     moving = true;
   }
 
-  if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && player.y > 0 && !outOfTime) {
-    player.y -= 4;
+  if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && player.y > 0) {
+    player.y -= speed;
     player.play('up');
     moving = true;
-  } else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && player.y < screen.h && !outOfTime) {
-    player.y += 4;
+  } else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && player.y < screen.h) {
+    player.y += speed;
     player.play('down');
     moving = true;
   }
@@ -159,12 +180,14 @@ function update() {
 
   game.physics.arcade.overlap(player, drugs, playerHitdrug, null, this);
 
+  timeText.text = 'Time Left: ' + currentTime;
+
 }
 
 function gameOver() {
   console.log('Called gameOver');
-  endgameText.text = "- Game Over! -";
-  endgameText.visible = true;
+  // endgameText.text = "- Game Over! -";
+  // endgameText.visible = true;
 
   // TODO: add end of game shit
 
@@ -180,6 +203,9 @@ function playerHitdrug(_player, _drug) {
 
   scoreText.text = 'score: ' + score;
 
+  //Shake camera
+  game.plugins.screenShake.shake(100);
+
   //  Are they any drugs left?
   if (drugs.countLiving() === 0) {
     //  New level starts
@@ -192,10 +218,27 @@ function playerHitdrug(_player, _drug) {
   }
 }
 
+// Drug Effects
+
+function methEffect() {
+  speed = 100;
+}
+
+function weedEffect() {
+  speed = 2;
+}
+
+function lsdEffect() {
+  speed = 5;
+}
+
+function cocaineEffect() {
+  speed = 14;
+}
+
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
 
 function playerMoved() {
   endgameText.visible = false;
@@ -206,8 +249,10 @@ var outOfTime = false;
 function startTimer(duration) {
   var timer = duration,
     minutes, seconds;
+
   setInterval(function() {
     if (!outOfTime) {
+      console.log("EI RUNNING!!");
       minutes = parseInt(timer / 60, 10);
       seconds = parseInt(timer % 60, 10);
 
