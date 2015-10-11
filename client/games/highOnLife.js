@@ -19,7 +19,7 @@ function preload() {
   game.load.spritesheet('player', 'assets/sprites/spaceman.png', 16, 16);
 
   //  Firefox doesn't support mp3 files, so use ogg
-  game.load.audio('boden', 'assets/audio/Win32_-_Faithless_Preacher.mp3');
+  game.load.audio('boden', ['assets/audio/main.mp3', 'assets/audio/main.ogg']);
 
 }
 
