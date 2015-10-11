@@ -1,8 +1,8 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', {
-  preload: preload,
-  create: create,
-  update: update
-});
+// var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', {
+//   preload: preload,
+//   create: create,
+//   update: update
+// });
 
 function preload() {
 
@@ -22,6 +22,8 @@ function preload() {
 }
 
 var player;
+var introText;
+
 var drugs;
 
 var lives = 3;
@@ -29,7 +31,6 @@ var score = 0;
 
 var scoreText;
 var livesText;
-var introText;
 
 var drugTypes = ["meth", "weed", "lsd", "cocaine"];
 
