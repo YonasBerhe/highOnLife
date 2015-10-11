@@ -32,6 +32,10 @@ var score = 0;
 
 var scoreText;
 var livesText;
+var timeText;
+
+var playTime = 2; //in minutes
+var currentTime = "1:00";
 
 var drugTypes = ["meth", "weed", "lsd", "cocaine"];
 
@@ -47,7 +51,7 @@ function create() {
   game.stage.backgroundColor = '#ffffff';
 
   //play music
-  music = game.add.audio('boden');
+  music = game.add.audio('boden', true);
   music.play();
 
   // NOTE: Drug Setup
@@ -96,6 +100,14 @@ function create() {
     fill: "#ffffff",
     align: "left"
   });
+  timeText = game.add.text(game.world.centerX - 110, 10, 'Time Left ' + currentTime, {
+    font: "40px Arial",
+    fill: "#ffffff",
+    align:"center"
+  });
+
+  startTimer(60 * playTime);
+
 }
 
 /**
@@ -146,6 +158,8 @@ function update() {
   }
 
   game.physics.arcade.overlap(player, drugs, playerHitdrug, null, this);
+
+  timeText.text = 'Time Left: ' + currentTime;
 
 }
 
@@ -200,4 +214,22 @@ function cocaineEffect() {
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// timer function
+function startTimer(duration) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        currentTime = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
 }
