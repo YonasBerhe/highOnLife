@@ -28,17 +28,6 @@ var LocalStorage = {
     }
 }
 
-
-
-/*
-var sample = { PlayFabId: "8C923B18390201DE", uuid: 1234, userName:"Kristoffer" }
-
-LocalStorage.setItem('test', sample)
-console.log(LocalStorage.getItem('test'))
-console.log(LocalStorage.clear('test'))
-console.log(LocalStorage.getItem('test')) */
-
-
 function isLoggedIn(){
     return LocalStorage.getItem('User') ? true : false
 }
@@ -111,17 +100,6 @@ function createUser(username){
         })
 }
 
-/*
-
-GetUserStatistics
-UpdateUserStatistics
-
-then
-
-GetLeaderboard
-
-*/
-
 function loginUser(username){
     var request = createUserLoginRequest(username)
 
@@ -146,6 +124,25 @@ function delay(fn, time){
 }
 
 /*
+
+
+var sample = { PlayFabId: "8C923B18390201DE", uuid: 1234, userName:"Kristoffer" }
+
+LocalStorage.setItem('test', sample)
+console.log(LocalStorage.getItem('test'))
+console.log(LocalStorage.clear('test'))
+console.log(LocalStorage.getItem('test'))
+
+
+GetUserStatistics
+UpdateUserStatistics
+
+then
+
+GetLeaderboard
+
+
+
 session: 156EB7602CBAEDC1---7A35-8D2D1CE3D5664A5-717AD317391CE031.2DF466F35B009DC
 CustomId : 156EB7602CBAEDC1
 

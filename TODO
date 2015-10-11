@@ -1,14 +1,11 @@
 Prototype:
-  ☐ Setup Meteor + PlayFab @Kris
-  ☐ Drug Event (color) @Kris @Bogdan @Louis
+  ☐ Drug Event (color) @Bogdan @Louis
   ☐ SoundFX @Bryan
 
 Polish-Stage-1:
   ☐ Background Music @Bryan
   ☐ Environment Effect (color) @Akshay @Louis
   ☐ NPC (Teddy Bears, non-playable character) @Louis
-  ☐ Loginform @Akshay
-
 
 Polish-Stage-2:
   ☐ Sprite || Animation @Everyone
@@ -20,6 +17,10 @@ Extra:
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+  ✔ Setup Meteor + PlayFab @Kris @done(2015-10-10 18:12) @project(Prototype)
   ✔ Controllable character @Yonas @Bogdan @Louis @done(2015-10-10 16:00) @project(Prototype)
   ✔ Setup Meteor + Phaser @Kris @done(2015-10-10 15:24) @project(Prototype)
   ✔ Basic PlayFab lib @Kris @done(2015-10-09 20:46) @project(Prototype)
+  ✔ Loginform @Akshay
+  ✔ Scoreing for users @Kristoffer
+  ✔ Leaderboard users @Kristoffer
