@@ -16,12 +16,14 @@ if (Meteor.isClient) {
         return LocalStorage.getItem('User') ? true : false
     }
     Router.route('/', function() {
-        var is = true;
-        console.log(isLoggedIn());
+        this.render('login');
+    });
+
+    Router.route('/game', function() {
         if (isLoggedIn()) {
             this.render('game')
         } else {
-            this.render('login');
+            window.location.replace("/");
         }
     });
 
