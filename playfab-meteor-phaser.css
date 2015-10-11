@@ -41,3 +41,20 @@ canvas {
 .headline {
     color: #fff
 }
+
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+input, button {
+    padding: 1em;
+    border: 1px solid;
+}
+#loginForm{
+    width: 280px;    
+}
