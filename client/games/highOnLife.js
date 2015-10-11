@@ -26,8 +26,8 @@ function create() {
 
 function update() {
   // Check is left and is in bound
-  console.log(character.x);
-  console.log(character.y);
+  //console.log(character.x);
+  //console.log(character.y);
   if (highOnLife.input.keyboard.isDown(Phaser.Keyboard.LEFT) && character.x > 0) {
     character.x -= 4;
   } else if (highOnLife.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && character.x < 450) {

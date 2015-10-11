@@ -84,24 +84,22 @@ function createUserLoginRequest(username){
     };
 }
 
-function createUserRequest(){
-    var uuid = Guid()
+function createUserRequest(username){
 
     return {
         TitleId : playfab.settings.title_id,
-        CustomId: uuid,
+        CustomId: username,
         CreateAccount: true
     }
 }
 
-function createUser(){
-        var request = createUserRequest()
+function createUser(username){
+        var request = createUserRequest(username)
 
         playfab.LoginWithCustomID(request, function(result){
             if(result.status === "OK"){
                 var User = result.data
                 User.CustomId = request.CustomId
-
                 LocalStorage.setItem('User', User)
                 playfab.session_ticket = User.SessionTicket
             } else {
@@ -121,8 +119,8 @@ GetLeaderboard
 
 */
 
-function loginUser(ID){
-    var request = createUserLoginRequest(ID)
+function loginUser(username){
+    var request = createUserLoginRequest(username)
 
     playfab.LoginWithCustomID(request, function(result){
         if(result.status === "OK"){
@@ -151,9 +149,11 @@ CustomId : 156EB7602CBAEDC1
 
 //playfab.settings.session_ticket = '156EB7602CBAEDC1---7A35-8D2D1CE3D5664A5-717AD317391CE031.2DF466F35B009DC'
 
+createUser('kristofferhebert')
+
 delay(function(){
     var CustomId = getCustomId()
-    loginUser('156EB7602CBAEDC1')
+    loginUser(CustomId)
 }, 3000)
 
 
