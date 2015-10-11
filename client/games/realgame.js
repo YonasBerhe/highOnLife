@@ -7,17 +7,17 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', {
 function preload() {
 
   game.load.atlas('breakout', '/assets/games/breakout/breakout.png', 'assets/games/breakout/breakout.json');
-  // game.load.image('starfield', '/assets/misc/starfield.jpg');
+  game.load.image('starfield', '/assets/misc/starfield.jpg');
 
-  game.load.baseURL = 'http://examples.phaser.io/assets/';
-  game.load.crossOrigin = 'anonymous';
-
-  // load the player
-  game.load.image('phaser', 'sprites/phaser-dude.png');
-  // load the drugzzz
-  game.load.image('meth', '/sprites/orb-blue.png');
-  game.load.image('weed', '/sprites/orb-green.png');
-  game.load.image('lsd', '/sprites/orb-red.png');
+  // game.load.baseURL = 'http://examples.phaser.io/assets/';
+  // game.load.crossOrigin = 'anonymous';
+  //
+  // // load the player
+  // game.load.image('phaser', 'sprites/phaser-dude.png');
+  // // load the drugzzz
+  // game.load.image('meth', '/sprites/orb-blue.png');
+  // game.load.image('weed', '/sprites/orb-green.png');
+  // game.load.image('lsd', '/sprites/orb-red.png');
 
 }
 
@@ -56,13 +56,13 @@ function create() {
   var drug;
 
     for (var i = 0; i < 8; i++) {
-      drug = drugs.create(game.world.randomX, game.world.randomY, 'breakout', 'meth');
+      drug = drugs.create(game.world.randomX, game.world.randomY, 'breakout', 'brick_' + 3 + '_1.png');
       // drug.body.bounce.set(1);
       drug.body.immovable = true;
     }
 
 
-  paddle = game.add.sprite(game.world.centerX, game.world.centerY, 'breakout', 'phaser');
+  paddle = game.add.sprite(game.world.centerX, game.world.centerY, 'breakout', 'paddle_big.png');
   paddle.anchor.setTo(0.5, 0.5);
   paddle.scale.setTo(1, 1);
 
@@ -95,12 +95,12 @@ function create() {
     fill: "#ffffff",
     align: "left"
   });
-  introText = game.add.text(game.world.centerX, 400, '- click to start -', {
-    font: "40px Arial",
-    fill: "#ffffff",
-    align: "center"
-  });
-  introText.anchor.setTo(0.5, 0.5);
+  // introText = game.add.text(game.world.centerX, 400, '- click to start -', {
+  //   font: "40px Arial",
+  //   fill: "#ffffff",
+  //   align: "center"
+  // });
+  // introText.anchor.setTo(0.5, 0.5);
 
   // game.input.onDown.add(releaseBall, this);
 
@@ -130,8 +130,8 @@ function update() {
   // if (ballOnPaddle) {
   //   ball.body.x = paddle.x;
   // } else {
-  //   game.physics.arcade.collide(ball, paddle, ballHitPaddle, null, this);
-  //   game.physics.arcade.collide(ball, drugs, ballHitdrug, null, this);
+    game.physics.arcade.collide(ball, paddle, ballHitPaddle, null, this);
+    game.physics.arcade.collide(paddle, drugs, ballHitdrug, null, this);
   // }
 
 }
@@ -174,8 +174,8 @@ function gameOver() {
 
 }
 
-function ballHitdrug(_ball, _drug) {
-
+function ballHitdrug(_paddle, _drug) {
+  console.log('Collision!');
   _drug.kill();
 
   score += 10;
@@ -190,11 +190,11 @@ function ballHitdrug(_ball, _drug) {
     introText.text = '- Next Level -';
 
     //  Let's move the ball back to the paddle
-    ballOnPaddle = true;
-    ball.body.velocity.set(0);
-    ball.x = paddle.x + 16;
-    ball.y = paddle.y - 16;
-    ball.animations.stop();
+    // ballOnPaddle = true;
+    // ball.body.velocity.set(0);
+    // ball.x = paddle.x + 16;
+    // ball.y = paddle.y - 16;
+    // ball.animations.stop();
 
     //  And bring the drugs back from the dead :)
     drugs.callAll('revive');
@@ -203,7 +203,7 @@ function ballHitdrug(_ball, _drug) {
 }
 
 function ballHitPaddle(_ball, _paddle) {
-
+  console.log('Collision!');
   var diff = 0;
 
   if (_ball.x < _paddle.x) {
