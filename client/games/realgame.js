@@ -47,7 +47,7 @@ function create() {
   game.physics.startSystem(Phaser.Physics.ARCADE);
 
   // add background
-  // s = game.add.tileSprite(0, 0, 800, 600, 'starfield');
+  s = game.add.tileSprite(0, 0, 800, 600, 'starfield');
 
   drugs = game.add.group();
   drugs.enableBody = true;
@@ -57,7 +57,7 @@ function create() {
 
     for (var i = 0; i < 8; i++) {
       drug = drugs.create(game.world.randomX, game.world.randomY, 'breakout', 'brick_' + 3 + '_1.png');
-      // drug.body.bounce.set(1);
+      drug.body.bounce.set(1);
       drug.body.immovable = true;
     }
 
@@ -69,8 +69,8 @@ function create() {
   game.physics.enable(paddle, Phaser.Physics.ARCADE);
 
   paddle.body.collideWorldBounds = true;
-  // paddle.body.bounce.set(1);
-  // paddle.body.immovable = true;
+  paddle.body.bounce.set(1);
+  paddle.body.immovable = true;
 
   // ball = game.add.sprite(game.world.centerX, paddle.y - 16, 'breakout', 'ball_1.png');
   // ball.anchor.set(0.5);
@@ -133,7 +133,6 @@ function update() {
     // game.physics.arcade.collide(ball, paddle, ballHitPaddle, null, this);
     game.physics.arcade.collide(paddle, drugs, playerHitdrug, null, this);
   // }
-
 }
 
 function releaseBall() {
