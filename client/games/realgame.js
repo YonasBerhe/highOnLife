@@ -130,8 +130,8 @@ function update() {
   // if (ballOnPaddle) {
   //   ball.body.x = paddle.x;
   // } else {
-    game.physics.arcade.collide(ball, paddle, ballHitPaddle, null, this);
-    game.physics.arcade.collide(paddle, drugs, ballHitdrug, null, this);
+    // game.physics.arcade.collide(ball, paddle, ballHitPaddle, null, this);
+    game.physics.arcade.collide(paddle, drugs, playerHitdrug, null, this);
   // }
 
 }
@@ -174,7 +174,7 @@ function gameOver() {
 
 }
 
-function ballHitdrug(_paddle, _drug) {
+function playerHitdrug(_paddle, _drug) {
   console.log('Collision!');
   _drug.kill();
 
