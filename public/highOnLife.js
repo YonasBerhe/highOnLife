@@ -18,9 +18,13 @@ function preload() {
 
   game.load.spritesheet('player', 'assets/sprites/spaceman.png', 16, 16);
 
+  game.load.spritesheet('cabinet', 'assets/sprites/cabinet.png', 35, 54);
+
 }
 
 var player;
+
+var cabinet;
 
 var drugs;
 
@@ -65,6 +69,7 @@ function create() {
 
   // NOTE: Player Setup
   player = game.add.sprite(game.world.centerX, game.world.centerY, 'player', 1);
+  cabinet = game.add.sprite(game.world.centerX, game.world.centerY, 'cabinet', 1);
 
   left = player.animations.add('left', [8, 9], 10, true);
   right = player.animations.add('right', [1, 2], 10, true);
