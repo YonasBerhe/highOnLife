@@ -33,15 +33,9 @@ function create() {
 
 function update() {
   // Check is left and is in bound
-<<<<<<< HEAD
-  //console.log(character.x);
-  //console.log(character.y);
-  if (highOnLife.input.keyboard.isDown(Phaser.Keyboard.LEFT) && character.x > 0) {
-=======
   // console.log(character.x);
   // console.log(character.y);
   if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && character.x > 0) {
->>>>>>> ccdd2ef695276dfe39f783d500d82ce63ac35d03
     character.x -= 4;
   } else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && character.x < 450) {
     character.x += 4;
