@@ -50,30 +50,38 @@ function getRandomColor() {
   return color;
 }
 
+var moving = false;
 
 function update() {
   // Check is left and is in bound
   // console.log(player.x);
   // console.log(player.y);
 
+    moving = false;
+
   if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && player.x > 0) {
     player.x -= 4;
     player.play('left');
-    game.stage.backgroundColor = getRandomColor();
+    moving = true;
   } else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && player.x < 450) {
     player.x += 4;
     player.play('right');
-    game.stage.backgroundColor = getRandomColor();
+    moving = true;
   }
 
   if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && player.y > 0) {
     player.y -= 4;
     player.play('up');
-    game.stage.backgroundColor = getRandomColor();
+    moving = true;
   } else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && player.y < 450) {
     player.y += 4;
     player.play('down');
-    game.stage.backgroundColor = getRandomColor();
+    moving = true;
   }
 
+  if (moving) {
+    game.stage.backgroundColor = getRandomColor();
+  } else {
+    player.animations.stop();
+  }
 }
