@@ -6,7 +6,6 @@
 </head>
 
 <body>
-  {{> login}}
 </body>
 
 <template name="game">
@@ -15,10 +14,14 @@
 
 <template name="login">
     <div class="loginWrapper well">
+        <h2 class="headline">High on life</h2>
         <form id="loginForm" method="#">
-            <p >Username</p>
-            <input type="text" id="usernameText" name="username" value="Type Username Here">
+            <p>Username</p>
+            <input type="text" id="usernameText" name="username" placeholder="Type Username Here" maxlength="10" required>
             <input type="submit" value="Log In">
         </form>
+    </div>
+    <div>
+        <h3 class="headline">Leaderboard</h3>
     </div>
 </template>

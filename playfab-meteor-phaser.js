@@ -16,7 +16,11 @@ if (Meteor.isClient) {
         return LocalStorage.getItem('User') ? true : false
     }
     Router.route('/', function() {
-        this.render('login');
+        if (isLoggedIn()) {
+            window.location.replace("/game");
+        } else {
+            this.render('login');
+        }
     });
 
     Router.route('/game', function() {
@@ -35,10 +39,10 @@ if (Meteor.isClient) {
             createUser(user);
             setTimeout(function() {
                     if (isLoggedIn()) {
-                        window.location.replace("/");
+                        window.location.replace("/game");
                     }
                 },
-                2000);
+                1000);
         }
     });
 }
