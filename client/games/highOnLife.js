@@ -108,6 +108,17 @@ function create() {
 
   startTimer(60 * playTime);
 
+  game.plugins.cameraShake = game.plugins.add(Phaser.Plugin.CameraShake);
+
+  game.plugins.cameraShake.setup({
+            shakeRange: 10,
+            shakeCount: 10,
+            shakeInterval: 10,
+            randomShake: false,
+            randomizeInterval: false,
+            shakeAxis: 'xy'
+        });
+
 }
 
 /**
@@ -180,6 +191,13 @@ function playerHitdrug(_player, _drug) {
   score += 10;
 
   scoreText.text = 'score: ' + score;
+
+  //Shake camera
+  // game.plugins.cameraShake.shake();
+  this.game.camera.x+= 20;
+  this.game.camera.y+= 20;
+  this.game.camera.x-= 20;
+  this.game.camera.y-= 20;
 
   //  Are they any drugs left?
   if (drugs.countLiving() === 0) {
