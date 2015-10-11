@@ -99,6 +99,14 @@ function create() {
   timeText = game.add.text(game.world.centerX - 110, 10, 'Time Left ' + currentTime, {
     font: "40px Arial",
     fill: "#ffffff",
+    align:"center"
+  });
+
+  startTimer(60 * playTime);
+
+  timeText = game.add.text(game.world.centerX - 110, 10, 'Time Left ' + currentTime, {
+    font: "40px Arial",
+    fill: "#ffffff",
     align: "center"
   });
   endgameText = game.add.text(game.world.centerX, 400, '- Start Moving! -', {
@@ -109,6 +117,12 @@ function create() {
   endgameText.anchor.setTo(0.5, 0.5);
   startTimer(60 * playTime);
 
+  game.plugins.screenShake = game.plugins.add(Phaser.Plugin.ScreenShake);
+
+  game.plugins.screenShake.setup({
+     shakeX: true,
+     shakeY: true
+    });
 }
 
 /**
@@ -183,6 +197,9 @@ function playerHitdrug(_player, _drug) {
   score += 10;
 
   scoreText.text = 'score: ' + score;
+
+  //Shake camera
+  game.plugins.screenShake.shake(100);
 
   //  Are they any drugs left?
   if (drugs.countLiving() === 0) {
