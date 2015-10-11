@@ -17,6 +17,10 @@ function preload() {
   game.load.image('starfield', '/assets/bg/starfield.jpg');
 
   game.load.spritesheet('player', 'assets/sprites/spaceman.png', 16, 16);
+
+  //  Firefox doesn't support mp3 files, so use ogg
+  game.load.audio('boden', 'assets/audio/Win32_-_Faithless_Preacher.mp3');
+
 }
 
 var player;
@@ -32,6 +36,7 @@ var livesText;
 var drugTypes = ["meth", "weed", "lsd", "cocaine"];
 
 var s;
+var music;
 
 function create() {
   console.log("CREATE");
@@ -40,6 +45,10 @@ function create() {
   // s = game.add.tileSprite(0, 0, 800, 600, 'starfield');
 
   game.stage.backgroundColor = '#ffffff';
+
+  //play music
+  music = game.add.audio('boden');
+  music.play();
 
   // NOTE: Drug Setup
   drugs = game.add.group();
@@ -174,7 +183,7 @@ function playerHitdrug(_player, _drug) {
 // Drug Effects
 
 function methEffect() {
-  
+
 }
 
 function weedEffect() {
