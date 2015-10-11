@@ -84,26 +84,27 @@ function createUserLoginRequest(username){
     };
 }
 
-function createUserRequest(){
-    var uuid = Guid()
+function createUserRequest(username){
 
     return {
         TitleId : playfab.settings.title_id,
-        CustomId: uuid,
+        CustomId: username,
         CreateAccount: true
     }
 }
 
-function createUser(){
-        var request = createUserRequest()
+function createUser(username){
+        var request = createUserRequest(username)
 
         playfab.LoginWithCustomID(request, function(result){
             if(result.status === "OK"){
                 var User = result.data
+                console.log('User created', request.CustomId)
                 User.CustomId = request.CustomId
-
                 LocalStorage.setItem('User', User)
                 playfab.session_ticket = User.SessionTicket
+                updateUsername(request.CustomId)
+
             } else {
                 console.log('something went wrong', result.code, result.status)
             }
@@ -121,12 +122,14 @@ GetLeaderboard
 
 */
 
-function loginUser(ID){
-    var request = createUserLoginRequest(ID)
+function loginUser(username){
+    var request = createUserLoginRequest(username)
 
     playfab.LoginWithCustomID(request, function(result){
         if(result.status === "OK"){
+            console.log('User logged in', request.CustomId)
             var User = result.data
+            User.CustomId = request.CustomId
             LocalStorage.setItem('User', User)
 
         } else {
@@ -146,19 +149,26 @@ function delay(fn, time){
 session: 156EB7602CBAEDC1---7A35-8D2D1CE3D5664A5-717AD317391CE031.2DF466F35B009DC
 CustomId : 156EB7602CBAEDC1
 
-*/
 
+kristofferhebert
+PlayFabID E8BBC01FC98C25A2
 
-//playfab.settings.session_ticket = '156EB7602CBAEDC1---7A35-8D2D1CE3D5664A5-717AD317391CE031.2DF466F35B009DC'
+jeffery
+PlayFabID AA636B2282F384DC
+playfab.settings.session_ticket = '156EB7602CBAEDC1---7A35-8D2D1CE3D5664A5-717AD317391CE031.2DF466F35B009DC'
+
+createUser('jeffery')
 
 delay(function(){
     var CustomId = getCustomId()
-    loginUser('156EB7602CBAEDC1')
+    loginUser(CustomId)
 }, 3000)
 
 
 //delay(updateUsername('kristoffer hebert'), 10000)
-
+delay(function(){
+    updateUsername('jeffery')
+}, 6000)
 delay(function(){
     console.log(getUser())
 }, 10000)
