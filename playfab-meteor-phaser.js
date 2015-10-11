@@ -2,7 +2,7 @@ if (Meteor.isClient) {
   Template.game.helpers(
       // game is a global var from /client/games/breakout.js
 
-  )
+  );
 }
 
 if (Meteor.isServer) {
