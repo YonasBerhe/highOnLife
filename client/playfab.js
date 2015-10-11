@@ -1,11 +1,8 @@
-console.log('hey')
-
 //GLOBAL
 playfab = PlayFabClientSDK
 
 playfab.settings.title_id = "7A35"
-playfab.settings.developer_secret_key =
-  "9M4SFMKC1YRFN8DPD499IEFWJD3YU5AR148SBU5I57XSYOZB3G"
+playfab.settings.developer_secret_key = "9M4SFMKC1YRFN8DPD499IEFWJD3YU5AR148SBU5I57XSYOZB3G"
 
 function Guid() {
   function s4() {
@@ -50,6 +47,16 @@ function getUser(){
     return isLoggedIn() ? LocalStorage.getItem('User') : false
 }
 
+function getCustomId(){
+    if(!isLoggedIn()){
+        console.log("user is not logged in")
+    }
+
+    var User = getUser()
+
+    return User.CustomId
+}
+
 function updateUsername(username){
     var request = {
         DisplayName: username
@@ -58,7 +65,7 @@ function updateUsername(username){
 
         if(result.status === "OK"){
             var User = LocalStorage.getItem('User');
-            User.username = result.data.DisplayName;
+            User.Username = result.data.DisplayName;
 
             LocalStorage.setItem('User', User);
 
@@ -69,11 +76,11 @@ function updateUsername(username){
     });
 }
 
-function createUserLoginRequest(uuid){
+function createUserLoginRequest(username){
     return {
         TitleId : playfab.settings.title_id,
-        CustomId: uuid,
-        "CreateAccount": false
+        CustomId: username,
+        CreateAccount: false
     };
 }
 
@@ -83,7 +90,7 @@ function createUserRequest(){
     return {
         TitleId : playfab.settings.title_id,
         CustomId: uuid,
-        "CreateAccount": true
+        CreateAccount: true
     }
 }
 
@@ -93,16 +100,26 @@ function createUser(){
         playfab.LoginWithCustomID(request, function(result){
             if(result.status === "OK"){
                 var User = result.data
+                User.CustomId = request.CustomId
+
                 LocalStorage.setItem('User', User)
-                sessionStorage.setItem('SessionTicket', 'value');
-
-                console.log('user created')
-
+                playfab.session_ticket = User.SessionTicket
             } else {
                 console.log('something went wrong', result.code, result.status)
             }
         })
 }
+
+/*
+
+GetUserStatistics
+UpdateUserStatistics
+
+then
+
+GetLeaderboard
+
+*/
 
 function loginUser(ID){
     var request = createUserLoginRequest(ID)
@@ -113,23 +130,38 @@ function loginUser(ID){
             LocalStorage.setItem('User', User)
 
         } else {
-            console.log('something went wrong', result.code, result.status)
+            console.log('something went wrong', result.code, result.status, result)
         }
     })
 }
 
 function delay(fn, time){
     var timeOut = time | 3000
-    setTimeout(fn, timeOut)
+    setTimeout(function(){
+        fn()
+    }, timeOut)
 }
 
-//create user on load
-createUser()
+/*
+session: 156EB7602CBAEDC1---7A35-8D2D1CE3D5664A5-717AD317391CE031.2DF466F35B009DC
+CustomId : 156EB7602CBAEDC1
 
-delay(updateUsername('kristoffer'))
+*/
+
+
+//playfab.settings.session_ticket = '156EB7602CBAEDC1---7A35-8D2D1CE3D5664A5-717AD317391CE031.2DF466F35B009DC'
+
+delay(function(){
+    var CustomId = getCustomId()
+    loginUser('156EB7602CBAEDC1')
+}, 3000)
+
+
+//delay(updateUsername('kristoffer hebert'), 10000)
+
 delay(function(){
     console.log(getUser())
-})
+}, 10000)
 /*
 
 
