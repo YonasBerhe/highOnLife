@@ -239,7 +239,7 @@ function playerHitdrug(_player, _drug) {
   scoreText.text = 'score: ' + score;
   druggetsound.play();
   //Shake camera
-  game.plugins.screenShake.shake(5000);
+  game.plugins.screenShake.shake(500);
 
   //  Are they any drugs left?
   if (drugs.countLiving() === 0) {
