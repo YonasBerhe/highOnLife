@@ -20,6 +20,8 @@ function preload() {
 
   game.load.spritesheet('cabinet', 'assets/sprites/cabinet.png', 35, 54);
 
+  game.load.spritesheet('open_cabinet', 'assets/sprites/open_cabinet.png', 33, 58);
+
   //  Firefox doesn't support mp3 files, so use ogg
   game.load.audio('boden', ['assets/audio/main.mp3', 'assets/audio/main.ogg']);
 
@@ -28,6 +30,8 @@ function preload() {
 var player;
 
 var cabinet;
+
+var open_cabinet;
 
 var drugs;
 
@@ -77,6 +81,7 @@ function create() {
   // NOTE: Player Setup
   player = game.add.sprite(game.world.centerX, game.world.centerY, 'player', 1);
   cabinet = game.add.sprite(game.world.centerX, game.world.centerY, 'cabinet', 1);
+  open_cabinet = game.add.sprite(10, 45, 'open_cabinet', 1);
 
   left = player.animations.add('left', [8, 9], 10, true);
   right = player.animations.add('right', [1, 2], 10, true);
