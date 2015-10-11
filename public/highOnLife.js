@@ -81,6 +81,7 @@ function create() {
 
   //play music
   music = game.add.audio('boden', true);
+  music.loop = true;
   music.play();
 
   // NOTE: Drug Setup
