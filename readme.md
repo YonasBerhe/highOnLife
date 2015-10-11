@@ -26,3 +26,13 @@ Ambient background music surrounding, with a light shade of gradient on the fore
 
 ## Extra:
 Multiplayer where each person get a drug and each see the world and each other differently.
+
+
+## Contributors
+- Yonas Berhe
+- Louis Vichy
+- Akshay Chalana
+- Bogdan Cshonyak
+- Bryan Rivera
+- Kristoffer Hebert
+
