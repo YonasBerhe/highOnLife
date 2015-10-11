@@ -1,7 +1,7 @@
 var screen = {
   w: window.innerWidth,
   h: window.innerHeight,
-}
+};
 
 var game = new Phaser.Game(screen.w, screen.h, Phaser.AUTO, 'highOnLife', {
  preload: preload,
@@ -36,8 +36,6 @@ var currentTime = "1:00";
 var drugTypes = ["meth", "weed", "lsd", "cocaine"];
 
 var s;
-
-
 
 function create() {
   console.log("CREATE");
