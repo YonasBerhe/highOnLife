@@ -1,7 +1,8 @@
 var screen = {
   w: window.innerWidth,
   h: window.innerHeight,
-}
+};
+
 var game = new Phaser.Game(screen.w, screen.h, Phaser.AUTO, 'highOnLife', {
   preload: preload,
   create: create,
@@ -167,6 +168,24 @@ function playerHitdrug(_player, _drug) {
     //  And bring the drugs back from the dead :)
     drugs.callAll('revive');
   }
+
+}
+
+// Drug Effects
+
+function methEffect() {
+  
+}
+
+function weedEffect() {
+
+}
+
+function lsdEffect() {
+
+}
+
+function cocaineEffect() {
 
 }
 
