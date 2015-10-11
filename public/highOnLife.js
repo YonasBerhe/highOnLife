@@ -22,6 +22,16 @@ function preload() {
 
   game.load.spritesheet('open_cabinet', 'assets/sprites/open_cabinet.png', 33, 58);
 
+  game.load.spritesheet('garbage', 'assets/sprites/garbage.png', 34, 30);
+
+  game.load.spritesheet('ironing_board', 'assets/sprites/ironing_board.png', 88, 38);
+
+  game.load.spritesheet('mjtree', 'assets/sprites/mjtree.png', 66, 57);
+
+  game.load.spritesheet('pan', 'assets/sprites/pan.png', 30, 29);
+
+  game.load.spritesheet('phonebooth', 'assets/sprites/phonebooth.png', 21, 29);
+
   //  Firefox doesn't support mp3 files, so use ogg
   game.load.audio('boden', ['assets/audio/main.mp3', 'assets/audio/main.ogg']);
 
@@ -32,6 +42,16 @@ var player;
 var cabinet;
 
 var open_cabinet;
+
+var garbage;
+
+var ironing_board;
+
+var mjtree;
+
+var pan;
+
+var phonebooth;
 
 var drugs;
 
@@ -82,6 +102,11 @@ function create() {
   player = game.add.sprite(game.world.centerX, game.world.centerY, 'player', 1);
   cabinet = game.add.sprite(game.world.centerX, game.world.centerY, 'cabinet', 1);
   open_cabinet = game.add.sprite(10, 45, 'open_cabinet', 1);
+  garbage = game.add.sprite(69, 25, 'garbage', 1);
+  ironing_board = game.add.sprite(5, 6, 'ironing_board', 1);
+  mjtree = game.add.sprite(89, 72, 'mjtree', 1);
+  pan = game.add.sprite(108, 300, 'pan', 1);
+  phonebooth = game.add.sprite(64, 10, 'phonebooth', 1);
 
   left = player.animations.add('left', [8, 9], 10, true);
   right = player.animations.add('right', [1, 2], 10, true);
