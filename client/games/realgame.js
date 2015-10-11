@@ -31,6 +31,8 @@ var scoreText;
 var livesText;
 var introText;
 
+var drugTypes = ["meth", "weed", "lsd", "cocaine"];
+
 var s;
 
 function create() {
@@ -51,9 +53,11 @@ function create() {
   var drug;
 
   for (var i = 0; i < 8; i++) {
-    drug = drugs.create(game.world.randomX, game.world.randomY, 'breakout', 'brick_' + 3 + '_1.png');
+    var num = getRandomInt(1, 4);
+    drug = drugs.create(game.world.randomX, game.world.randomY, 'breakout', 'brick_' + num + '_1.png');
     drug.body.bounce.set(1);
     drug.body.immovable = true;
+    drug.type = drugTypes[num - 1];
   }
 
 
@@ -119,6 +123,7 @@ function gameOver() {
 
 function playerHitdrug(_player, _drug) {
   console.log('Collision!');
+  console.log(_drug.type);
   _drug.kill();
 
   score += 10;
@@ -136,4 +141,8 @@ function playerHitdrug(_player, _drug) {
     drugs.callAll('revive');
   }
 
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
