@@ -97,7 +97,7 @@ function create() {
 
   player.anchor.setTo(0.5, 0.5);
 
-  player.scale.setTo(2, 2);
+  player.scale.setTo(4, 4);
 
   // NOTE: Score Text Setup
 
@@ -153,25 +153,30 @@ function update() {
   // Check is left and is in bound
   // console.log(player.x);
   // console.log(player.y);
+  player.body.velocity.set(0);
 
   moving = false;
 
   if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && player.x > 0) {
-    player.x -= speed;
+    // player.x -= speed;
+    player.body.velocity.x = -speed;
     player.play('left');
     moving = true;
   } else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && player.x < screen.w) {
-    player.x += speed;
+    // player.x += speed;
+    player.body.velocity.x = speed;
     player.play('right');
     moving = true;
   }
 
   if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && player.y > 0) {
-    player.y -= speed;
+    // player.y -= speed;
+    player.body.velocity.y = -speed;
     player.play('up');
     moving = true;
   } else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && player.y < screen.h) {
-    player.y += speed;
+    // player.y += speed;
+    player.body.velocity.y = speed;
     player.play('down');
     moving = true;
   }
@@ -226,19 +231,19 @@ function playerHitdrug(_player, _drug) {
 // Drug Effects
 
 function methEffect() {
-  speed = 100;
+  speed = 1800;
 }
 
 function weedEffect() {
-  speed = 2;
+  speed = 1000;
 }
 
 function lsdEffect() {
-  speed = 5;
+  speed = 450;
 }
 
 function cocaineEffect() {
-  speed = 14;
+  speed = 900;
 }
 
 function getRandomInt(min, max) {
