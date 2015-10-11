@@ -1,23 +1,30 @@
-var highOnLife = new Phaser.Game(450, 450, Phaser.AUTO, 'highOnLife', {
+var game = new Phaser.Game(450, 450, Phaser.AUTO, 'highOnLife', {
   preload: preload,
   create: create,
   update: update
 });
 
 function preload() {
+  console.log("PRELOAD");
 
-  highOnLife.load.baseURL = 'http://examples.phaser.io/assets/';
-  highOnLife.load.crossOrigin = 'anonymous';
+  game.load.baseURL = 'http://examples.phaser.io/assets/';
+  game.load.crossOrigin = 'anonymous';
 
-  highOnLife.load.image('phaser', 'sprites/phaser-dude.png');
+  game.load.image('phaser', 'sprites/phaser-dude.png');
 
 }
 
 var character;
+// var drugs = [];
+
+// var Drug = require('drug').Drug;
 
 function create() {
+  console.log("CREATE");
 
-  character = highOnLife.add.sprite(highOnLife.world.centerX, highOnLife.world.centerY, 'phaser');
+  // drugs[0] = new Drug();
+
+  character = game.add.sprite(game.world.centerX, game.world.centerY, 'phaser');
 
   character.anchor.setTo(0.5, 0.5);
 
@@ -26,17 +33,17 @@ function create() {
 
 function update() {
   // Check is left and is in bound
-  console.log(character.x);
-  console.log(character.y);
-  if (highOnLife.input.keyboard.isDown(Phaser.Keyboard.LEFT) && character.x > 0) {
+  // console.log(character.x);
+  // console.log(character.y);
+  if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT) && character.x > 0) {
     character.x -= 4;
-  } else if (highOnLife.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && character.x < 450) {
+  } else if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) && character.x < 450) {
     character.x += 4;
   }
 
-  if (highOnLife.input.keyboard.isDown(Phaser.Keyboard.UP) && character.y > 0) {
+  if (game.input.keyboard.isDown(Phaser.Keyboard.UP) && character.y > 0) {
     character.y -= 4;
-  } else if (highOnLife.input.keyboard.isDown(Phaser.Keyboard.DOWN) && character.y < 450) {
+  } else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && character.y < 450) {
     character.y += 4;
   }
 }
