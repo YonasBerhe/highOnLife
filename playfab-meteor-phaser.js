@@ -16,12 +16,18 @@ if (Meteor.isClient) {
         return LocalStorage.getItem('User') ? true : false
     }
     Router.route('/', function() {
-        var is = true;
-        console.log(isLoggedIn());
+        if (isLoggedIn()) {
+            window.location.replace("/game");
+        } else {
+            this.render('login');
+        }
+    });
+
+    Router.route('/game', function() {
         if (isLoggedIn()) {
             this.render('game')
         } else {
-            this.render('login');
+            window.location.replace("/");
         }
     });
 
@@ -33,10 +39,10 @@ if (Meteor.isClient) {
             createUser(user);
             setTimeout(function() {
                     if (isLoggedIn()) {
-                        window.location.replace("/");
+                        window.location.replace("/game");
                     }
                 },
-                2000);
+                1000);
         }
     });
 }

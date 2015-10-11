@@ -1,12 +1,12 @@
 var screen = {
   w: window.innerWidth,
   h: window.innerHeight,
-};
+}
 
 var game = new Phaser.Game(screen.w, screen.h, Phaser.AUTO, 'highOnLife', {
-  preload: preload,
-  create: create,
-  update: update
+ preload: preload,
+ create: create,
+ update: update
 });
 
 function preload() {
@@ -17,10 +17,6 @@ function preload() {
   game.load.image('starfield', '/assets/bg/starfield.jpg');
 
   game.load.spritesheet('player', 'assets/sprites/spaceman.png', 16, 16);
-
-  //  Firefox doesn't support mp3 files, so use ogg
-  game.load.audio('boden', ['assets/audio/main.mp3', 'assets/audio/main.ogg']);
-
 }
 
 var player;
@@ -40,7 +36,6 @@ var currentTime = "1:00";
 var drugTypes = ["meth", "weed", "lsd", "cocaine"];
 
 var s;
-var music;
 
 
 
@@ -51,10 +46,6 @@ function create() {
   // s = game.add.tileSprite(0, 0, 800, 600, 'starfield');
 
   game.stage.backgroundColor = '#000000';
-
-  //play music
-  music = game.add.audio('boden', true);
-  music.play();
 
   // NOTE: Drug Setup
   drugs = game.add.group();
@@ -102,6 +93,7 @@ function create() {
     fill: "#ffffff",
     align: "left"
   });
+
   timeText = game.add.text(game.world.centerX - 110, 10, 'Time Left ' + currentTime, {
     font: "40px Arial",
     fill: "#ffffff",
@@ -167,8 +159,6 @@ function update() {
 
   game.physics.arcade.overlap(player, drugs, playerHitdrug, null, this);
 
-  timeText.text = 'Time Left: ' + currentTime;
-
 }
 
 function gameOver() {
@@ -202,27 +192,10 @@ function playerHitdrug(_player, _drug) {
   }
 }
 
-// Drug Effects
-
-function methEffect() {
-
-}
-
-function weedEffect() {
-
-}
-
-function lsdEffect() {
-
-}
-
-function cocaineEffect() {
-
-}
-
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
 
 function playerMoved() {
   endgameText.visible = false;

@@ -2,6 +2,7 @@
 body {
     background: #000;
     text-align: center;
+    color: #fff;
 }
 canvas {
     position: absolute;
@@ -35,4 +36,8 @@ canvas {
 .username {
     text-align: center;
     position: inherit;
+}
+
+.headline {
+    color: #fff
 }
